@@ -1,35 +1,50 @@
 <html>
+
 <head>
-    <title> ToDo App </title>
-    <link href="https://fonts.googleapis.com/css?family=Lato:100"     rel="stylesheet">
-    <link href="/styles.css" rel="stylesheet">
-  </head>
+  <title> ToDo App </title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+  <script src="https://kit.fontawesome.com/74a2fd6b7e.js" crossorigin="anonymous"></script>
+</head>
+
 <body>
+  <main>
+    <div class="app-container">
+      <h1> My To-Do List </h1>
 
-  <div class="container">
-    <h2> A Simple ToDo List App </h2>
-    <form action ="/tasks" method="POST">
-          <input type="text" name="newtask" placeholder="add new task">        
-          <button type="submit"> Add Task </button>
-    </form>
+      <div class="todo-container">
+        <div class="input-box">
+          <form action="/addtask" method="POST">
+            <input class="todo-input" id="prompt" type="text" name="newtask" label="Enter a new todo item"
+              placeholder="E.g. Build a web app">
+            <button class="todo-button" name="button">+</button>
+        </div>
+        <ul class="todo-list">
+          <% for( var i=0; i < task.length; i++){ %>
+            <li class="todo todo-item"><input type="checkbox" name="check" value="<%= task[i] %>" />
+              <%= task[i] %>
+                <button class="del-btn" formaction="/removetask" type="submit" id="top"><i
+                    class="fa-solid fa-trash-can"></i></button>
+            </li>
+            <% } %>
+              </form>
 
+              <h2> Completed tasks </h2>
 
+              <button class="del-btn2" formaction="/removeall" type="submit" id="top" data-delete-list-button>Remove all
+                completed</button>
 
-    <h2> Added Task </h2>
-    <form action="/tasks/remove" method="POST">
-    <ul>
-      <% for( var i = 0; i < task.length; i++){ %>
-          <li><input type="checkbox" name="check" value="<%= task[i].id %>" /> <%= task[i].text %> </li>
-      <% } %>
-      </ul>
-    <button type="submit"> Remove </button>
-  </form>
+              <% for(var i=0; i < complete.length; i++){ %>
+                <li class="todo todo-item2"><input type="checkbox" checked>
+                  <%= complete[i] %>
 
-  <form action="/tasks/deleteall" method="POST">
-    <button type="submit">Delete all</button>
-  </form>
+                </li>
 
+                <% } %>
+        </ul>
+      </div>
+    </div>
+    </div>
 
-</div>
+  </main>
 </body>
-</html>
